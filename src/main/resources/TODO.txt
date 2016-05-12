@@ -1,0 +1,2 @@
+- hibernate_sequenece kaldir
+- composer icerisinde autowire

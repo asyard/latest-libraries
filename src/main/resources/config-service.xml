@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+
+    <context:component-scan base-package="tr" />
+
+    <context:annotation-config />
+
+    <bean id="c3p0DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="org.h2.Driver" />
+        <property name="jdbcUrl" value="jdbc:h2:tcp://localhost:9092/~/test" />
+        <!--<property name="jdbcUrl" value="jdbc:h2:file:~/testdb" />-->
+<!--        <property name="jdbcUrl" value="jdbc:h2:mem:myDBname" />-->
+        <property name="user" value="sa" />
+        <property name="password" value="" />
+    </bean>
+
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="c3p0DataSource" />
+        <property name="packagesToScan">
+            <util:list>
+                <value>tr.model</value>
+            </util:list>
+        </property>
+
+        <property name="hibernateProperties">
+            <util:constant static-field="tr.util.HibernateProps.hibernateProps" />
+        </property>
+    </bean>
+
+    <jdbc:initialize-database data-source="c3p0DataSource" ignore-failures="DROPS">
+        <jdbc:script location="classpath:create.sql"/>
+    </jdbc:initialize-database>
+
+</beans>

@@ -1,0 +1,34 @@
+<zk >
+
+    <grid apply="tr.bean.IndexComposer">
+        <rows>
+            <row>
+                <cell>
+                    <label value="Person Name  : " />
+                </cell>
+
+                <cell>
+                    <textbox id="nameTextbox" value="" />
+                </cell>
+            </row>
+
+
+            <row>
+                <cell>
+                    <label value="Person Birth Year  : " />
+                </cell>
+
+                <cell>
+                    <textbox id="birthYearTextbox" value="" />
+                </cell>
+            </row>
+
+            <row>
+                <button id="addPersonButton" label="save" />
+            </row>
+
+        </rows>
+    </grid>
+
+
+</zk>

@@ -1,0 +1,27 @@
+<zk>
+
+    <grid>
+        <rows>
+            <row>
+                <cell>
+                    <label value="Name" />
+                </cell>
+                <cell>
+                    <textbox />
+                </cell>
+            </row>
+
+            <row>
+                <cell>
+                    <label value="Pass" />
+                </cell>
+                <cell>
+                    <textbox type="password" />
+                </cell>
+            </row>
+
+        </rows>
+    </grid>
+
+
+</zk>

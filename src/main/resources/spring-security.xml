@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+    <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
+
+    <security:http use-expressions="false" entry-point-ref="loginEntryPoint" authentication-manager-ref="authManager">
+        <security:intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <!--<security:intercept-url pattern="/zkau/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
+        <security:intercept-url pattern="/secured/*" access="IS_AUTHENTICATED_FULLY" />
+
+        <security:csrf disabled="true" />
+    </security:http>
+
+
+    <bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <constructor-arg name="loginFormUrl" value="/login.zul"/>
+    </bean>
+
+
+    <security:authentication-manager id="authManager" erase-credentials="false">
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="user1" password="111111" authorities="ROLE_USER, ROLE_ADMIN" />
+                <security:user name="user2" password="222222" authorities="ROLE_USER" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+
+</beans>
