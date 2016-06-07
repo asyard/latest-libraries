@@ -1,7 +1,9 @@
 package tr.bean;
 
-import org.hibernate.*;
-import org.hibernate.internal.SQLQueryImpl;
+import org.hibernate.LockOptions;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tr.model.BaseDAO;
