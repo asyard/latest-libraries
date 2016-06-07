@@ -15,11 +15,17 @@
 
         <security:csrf disabled="true" />
 
-        <security:form-login login-page="/login.zul" default-target-url="/index.zul" login-processing-url="/perform-login" authentication-failure-url="/login.zul?error=true" />
+        <security:form-login login-page="/login.zul" default-target-url="/secured/index.zul" login-processing-url="/perform-login" authentication-failure-url="/login.zul?error=true" />
 
         <security:logout logout-success-url="/mainpage.zul" />
 
+        <security:session-management>
+            <security:concurrency-control max-sessions="1" expired-url="/mainpage.zul" />
+        </security:session-management>
+
     </security:http>
+
+
 
 
 <!--    <bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">

@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
     <div apply="tr.bean.LoginComposer">
-    Hi, <h:a href="/login.zul"> click here </h:a>  to log-in
+    Sorry, timeout. <h:a href="/mainmenu.zul"> click here </h:a>  for main menu
     </div>
 
 </zk>
