@@ -7,7 +7,11 @@
 
     <div apply="tr.bean.IndexComposer">
 
-    <label id="welcomeLabel" value=""></label>    <h:a href="/logout">click here to logout</h:a>
+    <label id="welcomeLabel" value=""></label>
+        <h:form action="/logout" method="POST">       <!--  logout should be POST, when csrf enabled  -->
+            <h:input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <h:input type="submit" value="Logout" />
+        </h:form>
 
 
         <grid id="addPersonGrid">
