@@ -8,18 +8,23 @@
 
     <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" />
 
-    <security:http use-expressions="false" entry-point-ref="loginEntryPoint" authentication-manager-ref="authManager">
+    <security:http use-expressions="false"  authentication-manager-ref="authManager">  <!-- entry-point-ref="loginEntryPoint"  -->
         <security:intercept-url pattern="/*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <!--<security:intercept-url pattern="/zkau/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />-->
         <security:intercept-url pattern="/secured/*" access="IS_AUTHENTICATED_FULLY" />
 
         <security:csrf disabled="true" />
+
+        <security:form-login login-page="/login.zul" default-target-url="/index.zul" login-processing-url="/perform-login" authentication-failure-url="/login.zul?error=true" />
+
+        <security:logout logout-success-url="/mainpage.zul" />
+
     </security:http>
 
 
-    <bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+<!--    <bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
         <constructor-arg name="loginFormUrl" value="/login.zul"/>
-    </bean>
+    </bean>-->
 
 
     <security:authentication-manager id="authManager" erase-credentials="false">

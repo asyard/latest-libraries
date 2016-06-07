@@ -9,9 +9,12 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Grid;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import tr.model.Person;
+import tr.util.PrivilegeChecker;
 import tr.util.SpringUtil;
 
 import java.util.List;
@@ -26,8 +29,15 @@ public class IndexComposer extends SelectorComposer {
 
     private static final Logger logger = LoggerFactory.getLogger(IndexComposer.class);
 
+
+    @Wire("#welcomeLabel")
+    private Label welcomeLabel;
+
     @Wire("#nameTextbox")
     private Textbox nameTextbox;
+
+    @Wire("#addPersonGrid")
+    private Grid addPersonGrid;
 
     @Wire("#birthYearTextbox")
     private Textbox birthYearTextbox;
@@ -38,6 +48,16 @@ public class IndexComposer extends SelectorComposer {
     @Override
     public void doAfterCompose(Component comp) throws Exception {
         super.doAfterCompose(comp);
+
+
+        String loggedUser = PrivilegeChecker.getLoggedInUserName();
+        if (PrivilegeChecker.isPrivileged("ROLE_ADMIN")) {
+            addPersonGrid.setVisible(true);
+             welcomeLabel.setValue("welcome admin : " + loggedUser);
+        } else {
+            addPersonGrid.setVisible(false);
+            welcomeLabel.setValue("welcome user : " + loggedUser);
+        }
     }
 
     @Listen("onClick =#addPersonButton")

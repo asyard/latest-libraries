@@ -1,27 +1,41 @@
-<zk>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:h="xhtml"
+    xmlns:d="http://www.zkoss.org/2005/zk/client/attribute"
+    xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
 
-    <grid>
+    <h:form action="/perform-login" method="POST">
+
+    <grid apply="tr.bean.LoginComposer">
         <rows>
             <row>
                 <cell>
-                    <label value="Name" />
+                    <label value="Name  : " />
                 </cell>
+
                 <cell>
-                    <textbox />
+                    <textbox id="nameTextbox" value="" d:name="username" />
+                </cell>
+            </row>
+
+
+            <row>
+                <cell>
+                    <label value="Password  : " />
+                </cell>
+
+                <cell>
+                    <textbox id="passwordTextbox" type="password" value="" d:name="password" />
                 </cell>
             </row>
 
             <row>
-                <cell>
-                    <label value="Pass" />
-                </cell>
-                <cell>
-                    <textbox type="password" />
-                </cell>
+                <h:button name="submit" type="submit" value="submit">Log in</h:button>
             </row>
 
         </rows>
     </grid>
+    </h:form>
 
 
 </zk>

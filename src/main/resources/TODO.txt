@@ -1,2 +1,4 @@
 - hibernate_sequenece kaldir
 - composer icerisinde autowire
+- login via database
+- role hierarchy
